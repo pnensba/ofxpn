@@ -60,7 +60,7 @@ void testApp::setup(){
 	for(int i=0; i<NUM_PARTICLES; i++) {
 		Particle &p = particles[i];
 		p.vel.set(0, 0);
-		p.mass = ofRandom(0.5, 1);		
+		p.mass = ofRandom(0.5, 1);
 		particlesPos[i].set(ofRandomWidth(), ofRandomHeight());
 	}
 	
@@ -112,7 +112,8 @@ void testApp::draw(){
 #else	
 	opencl.readBuffer(sizeof(Vec2) * NUM_PARTICLES, clMemPosVBO, particlesPos);
 	glBufferSubDataARB(GL_ARRAY_BUFFER_ARB, 0, sizeof(Vec2) * NUM_PARTICLES, particlesPos);
-#endif	
+#endif
+    
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(2, GL_FLOAT, 0, 0);
 	glDrawArrays(GL_POINTS, 0, NUM_PARTICLES);

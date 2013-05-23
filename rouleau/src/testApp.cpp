@@ -1,6 +1,7 @@
 //# -*- mode: C++; coding: utf-8-*-
 #include "testApp.h"
 
+char bufchar [50];
 testApp::~testApp(){
     
 };
@@ -9,7 +10,7 @@ void testApp::setup(){
     
     W = ofGetScreenWidth();
     H = ofGetScreenHeight();
-    Hpix = 4727;
+    Hpix = 3151;
     ofSetVerticalSync(true);
     ofHideCursor();    
     /////////////////////////// SETUP MONTAGE
@@ -19,14 +20,19 @@ void testApp::setup(){
     dir.sort();
     N = dir.numFiles(); // Number of Images
     for (int i = 0; i < N; i++){
-        rouleau[i].setUseTexture(false);
+        rouleau[i].setUseTexture(false); // do not saturate GPU RAM
         rouleau[i].loadImage(dir.getPath(i));
-        rouleau[i].resize(rouleau[i].width*2.0f/3.0f,Hpix*2.0f/3.0f);
+        /*
+         rouleau[i].resize(rouleau[i].width*2.0f/3.0f,Hpix*2.0f/3.0f);
+        sprintf(bufchar, "new/%02d.jpg",i+1);
+        cout<<bufchar<<endl;
+        rouleau[i].saveImage(bufchar);
+         */
         Ws[i] = rouleau[i].width;
         cout<<i<<" "<<rouleau[i].isUsingTexture()<<"\n";
     };
-    Hpix *= 2.0f/3.0f;
-    cout << Hpix;
+    //Hpix *= 2.0f/3.0f;
+    //cout << Hpix;
     rouleau[0].setUseTexture(true);
     rouleau[0].reloadTexture();
     rouleau[1].setUseTexture(true);
